@@ -4,7 +4,7 @@ body {
     background-color: #fffdf5;
     margin: 0;
     transition: background-color 0.8s ease;
-    overflow-x: hidden; /* Important: prevents scrollbars during animation */
+    overflow-x: hidden; 
 }
 
 /* NAVIGATION */
@@ -40,6 +40,8 @@ body {
     border-top: 5px solid #DAA520;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Keeps card above background */
+    z-index: 1;
 }
 
 .info-card:hover {
@@ -97,75 +99,56 @@ body {
 .gold-text { color: #8B6914; }
 .contact-box { background: #fff9e6; }
 
-/* --- DARK THEME: MOVING SPIRAL VORTEX ANIMATION --- */
+/* --- DARK THEME: FORCED MOVING SPIRAL --- */
 
 .dark-theme {
-    background-color: #000000;
+    background-color: #000000 !important;
     color: #ffffff;
-    /* Base glow to add depth */
-    background-image: radial-gradient(circle at center, #2c2401 0%, #000 70%);
 }
 
-/* The Futuristic Spiral Lines */
+/* This is the spinning layer */
 .dark-theme::before {
     content: "";
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    /* Creates multiple spiral "arms" using conic gradient */
+    /* Center the spiral */
+    top: 50%;
+    left: 50%;
+    /* Make it much larger than the screen so edges aren't seen */
+    width: 300vmax; 
+    height: 300vmax;
     background: conic-gradient(
-        from 0deg at 50% 50%,
+        from 0deg,
         transparent 0deg,
-        rgba(218, 165, 32, 0.15) 20deg,
+        rgba(218, 165, 32, 0.2) 20deg,
         transparent 40deg,
         rgba(255, 215, 0, 0.1) 180deg,
-        transparent 220deg,
-        rgba(139, 105, 20, 0.2) 300deg,
+        transparent 200deg,
+        rgba(139, 105, 20, 0.3) 320deg,
         transparent 360deg
     );
-    animation: spiralRotate 12s linear infinite;
+    /* Anchor point for rotation */
+    transform-origin: center center;
+    /* Force the animation */
+    animation: spiralRotate 10s linear infinite !important;
     z-index: -1;
     pointer-events: none;
 }
 
-/* Secondary layer of pulsing radial lines for a tech-look */
-.dark-theme::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-radial-gradient(
-        circle at center,
-        transparent 0,
-        transparent 80px,
-        rgba(218, 165, 32, 0.05) 81px,
-        rgba(218, 165, 32, 0.05) 82px
-    );
-    animation: pulseGlow 4s ease-in-out infinite;
-    z-index: -1;
-}
-
 @keyframes spiralRotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes pulseGlow {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 /* Glassmorphism Cards for Dark Theme */
 .dark-theme .info-card {
-    background: rgba(15, 15, 15, 0.75) !important;
-    backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(15, 15, 15, 0.85) !important;
+    backdrop-filter: blur(15px);
     border: 1px solid rgba(218, 165, 32, 0.3);
     color: #ffffff;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
 .dark-theme .gold-text {
@@ -174,16 +157,11 @@ body {
 }
 
 .dark-theme .custom-nav {
-    background: rgba(0, 0, 0, 0.95) !important;
+    background: #000 !important;
     border-bottom: 2px solid #8B6914;
 }
 
 .dark-theme .hero-header {
     background: #000;
     border-bottom: 3px solid #DAA520;
-}
-
-.dark-theme .anime-card {
-    background-color: #111;
-    border: 1px solid rgba(218, 165, 32, 0.2);
 }
