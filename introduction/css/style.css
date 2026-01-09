@@ -4,6 +4,7 @@ body {
     background-color: #fffdf5;
     margin: 0;
     transition: background-color 0.8s ease;
+    overflow-x: hidden; /* Prevents scrollbars from the animation */
 }
 
 /* NAVIGATION */
@@ -39,6 +40,8 @@ body {
     border-top: 5px solid #DAA520;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 2;
 }
 
 .info-card:hover {
@@ -53,18 +56,17 @@ body {
     border-radius: 15px;
     height: 350px;
     background-color: #fcf8e3;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.4s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 }
 
 .anime-card img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: transform 0.5s ease;
     padding: 10px;
 }
 
@@ -81,33 +83,16 @@ body {
     transition: transform 0.3s ease;
 }
 
-.anime-card:hover img { transform: scale(1.05); }
 .anime-card:hover .anime-overlay { transform: translateY(0); }
 
-.school-logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
-    object-fit: contain;
-    background: #fff;
-    padding: 5px;
-}
-
-.gold-text { color: #8B6914; }
-.contact-box { background: #fff9e6; }
-
-/* --- DARK THEME: LIQUID FLOW ANIMATION --- */
+/* --- DARK THEME: MOVING SPIRAL VORTEX --- */
 
 .dark-theme {
-    background-color: #000000;
-    color: #ffffff;
-    background-image: 
-        radial-gradient(at 0% 0%, rgba(139, 105, 20, 0.2) 0, transparent 50%), 
-        radial-gradient(at 100% 100%, rgba(218, 165, 32, 0.1) 0, transparent 50%);
-    background-attachment: fixed;
+    background-color: #000;
+    color: #fff;
 }
 
-/* This creates the flowing lines from your GIF reference */
+/* The Futuristic Spiral Effect */
 .dark-theme::before {
     content: "";
     position: fixed;
@@ -115,39 +100,66 @@ body {
     left: -50%;
     width: 200%;
     height: 200%;
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 40px,
-        rgba(218, 165, 32, 0.03) 40px,
-        rgba(255, 215, 0, 0.06) 80px
+    /* Creates multiple spiral light "arms" */
+    background: conic-gradient(
+        from 0deg at 50% 50%,
+        transparent 0deg,
+        rgba(218, 165, 32, 0.1) 60deg,
+        transparent 120deg,
+        rgba(255, 215, 0, 0.15) 180deg,
+        transparent 240deg,
+        rgba(139, 105, 20, 0.1) 300deg,
+        transparent 360deg
     );
-    animation: flowLines 15s linear infinite;
+    animation: spiralRotate 15s linear infinite;
     z-index: -1;
     pointer-events: none;
 }
 
-@keyframes flowLines {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(80px, 80px) rotate(0deg); }
+/* Adds a second layer of lines moving the opposite way for complexity */
+.dark-theme::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-radial-gradient(
+        circle at center,
+        transparent 0,
+        transparent 100px,
+        rgba(218, 165, 32, 0.03) 101px,
+        rgba(218, 165, 32, 0.03) 102px
+    );
+    animation: pulseLines 8s ease-in-out infinite;
+    z-index: -1;
 }
 
-/* Glassmorphism Cards for Dark Theme */
-.dark-theme .info-card {
-    background: rgba(20, 20, 20, 0.7) !important;
-    backdrop-filter: blur(20px) saturate(180%);
+@keyframes spiralRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes pulseLines {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* Glassmorphism Logic */
+.dark-theme .info-card, .dark-theme .anime-card {
+    background: rgba(15, 15, 15, 0.8) !important;
+    backdrop-filter: blur(15px);
     border: 1px solid rgba(218, 165, 32, 0.3);
-    color: #ffffff;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    color: #fff;
 }
 
 .dark-theme .gold-text {
     color: #FFD700;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .dark-theme .custom-nav {
-    background: rgba(0, 0, 0, 0.95) !important;
+    background: #000 !important;
     border-bottom: 2px solid #8B6914;
 }
 
@@ -156,11 +168,4 @@ body {
     border-bottom: 3px solid #DAA520;
 }
 
-.dark-theme .anime-card {
-    background-color: #111;
-    border: 1px solid rgba(218, 165, 32, 0.2);
-}
-
-.dark-theme .text-muted {
-    color: #aaa !important;
-}
+.dark-theme .text-muted { color: #ccc !important; }
