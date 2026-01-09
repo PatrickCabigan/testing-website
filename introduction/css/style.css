@@ -4,7 +4,6 @@ body {
     background-color: #fffdf5;
     margin: 0;
     transition: background-color 0.8s ease;
-    overflow-x: hidden; 
 }
 
 /* NAVIGATION */
@@ -40,8 +39,6 @@ body {
     border-top: 5px solid #DAA520;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* Keeps card above background */
-    z-index: 1;
 }
 
 .info-card:hover {
@@ -99,69 +96,71 @@ body {
 .gold-text { color: #8B6914; }
 .contact-box { background: #fff9e6; }
 
-/* --- DARK THEME: FORCED MOVING SPIRAL --- */
+/* --- DARK THEME: LIQUID FLOW ANIMATION --- */
 
 .dark-theme {
-    background-color: #000000 !important;
+    background-color: #000000;
     color: #ffffff;
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(139, 105, 20, 0.2) 0, transparent 50%), 
+        radial-gradient(at 100% 100%, rgba(218, 165, 32, 0.1) 0, transparent 50%);
+    background-attachment: fixed;
 }
 
-/* This is the spinning layer */
+/* This creates the flowing lines from your GIF reference */
 .dark-theme::before {
     content: "";
     position: fixed;
-    /* Center the spiral */
-    top: 50%;
-    left: 50%;
-    /* Make it much larger than the screen so edges aren't seen */
-    width: 300vmax; 
-    height: 300vmax;
-    background: conic-gradient(
-        from 0deg,
-        transparent 0deg,
-        rgba(218, 165, 32, 0.2) 20deg,
-        transparent 40deg,
-        rgba(255, 215, 0, 0.1) 180deg,
-        transparent 200deg,
-        rgba(139, 105, 20, 0.3) 320deg,
-        transparent 360deg
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(218, 165, 32, 0.03) 40px,
+        rgba(255, 215, 0, 0.06) 80px
     );
-    /* Anchor point for rotation */
-    transform-origin: center center;
-    /* Force the animation */
-    animation: spiralRotate 10s linear infinite !important;
+    animation: flowLines 15s linear infinite;
     z-index: -1;
     pointer-events: none;
 }
 
-@keyframes spiralRotate {
-    from {
-        transform: translate(-50%, -50%) rotate(0deg);
-    }
-    to {
-        transform: translate(-50%, -50%) rotate(360deg);
-    }
+@keyframes flowLines {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(80px, 80px) rotate(0deg); }
 }
 
 /* Glassmorphism Cards for Dark Theme */
 .dark-theme .info-card {
-    background: rgba(15, 15, 15, 0.85) !important;
-    backdrop-filter: blur(15px);
+    background: rgba(20, 20, 20, 0.7) !important;
+    backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(218, 165, 32, 0.3);
     color: #ffffff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
 .dark-theme .gold-text {
     color: #FFD700;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
 .dark-theme .custom-nav {
-    background: #000 !important;
+    background: rgba(0, 0, 0, 0.95) !important;
     border-bottom: 2px solid #8B6914;
 }
 
 .dark-theme .hero-header {
     background: #000;
     border-bottom: 3px solid #DAA520;
+}
+
+.dark-theme .anime-card {
+    background-color: #111;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+.dark-theme .text-muted {
+    color: #aaa !important;
 }
