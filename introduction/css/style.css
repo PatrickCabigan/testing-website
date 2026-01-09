@@ -3,21 +3,19 @@ body {
     font-family: 'Poppins', sans-serif;
     background-color: #fffdf5;
     margin: 0;
-    transition: background 0.8s ease, color 0.5s ease;
+    transition: background-color 0.8s ease;
 }
 
 /* NAVIGATION */
 .custom-nav {
     background-color: #8B6914;
     padding: 0.8rem 0;
-    transition: background 0.5s ease;
 }
 
 /* HERO SECTION */
 .hero-header {
     background: linear-gradient(135deg, #FFD700, #DAA520);
     border-bottom: 5px solid #8B6914;
-    transition: background 0.5s ease;
 }
 
 .profile-circle {
@@ -40,7 +38,7 @@ body {
     border-radius: 20px;
     border-top: 5px solid #DAA520;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .info-card:hover {
@@ -48,7 +46,7 @@ body {
     box-shadow: 0 15px 35px rgba(139, 105, 20, 0.3);
 }
 
-/* ANIME GALLERY FIXED SIZE */
+/* ANIME GALLERY */
 .anime-card {
     position: relative;
     overflow: hidden;
@@ -98,58 +96,71 @@ body {
 .gold-text { color: #8B6914; }
 .contact-box { background: #fff9e6; }
 
-/* --- THE MAGIC: FUTURISTIC NEON FLOW DARK THEME --- */
+/* --- DARK THEME: LIQUID FLOW ANIMATION --- */
+
 .dark-theme {
-    /* Moving Neon Background */
-    background: linear-gradient(
-        125deg, 
-        #000000 0%, 
-        #0b0b0b 30%, 
-        #8B6914 50%, 
-        #DAA520 55%, 
-        #0b0b0b 70%, 
-        #000000 100%
-    );
-    background-size: 400% 400%;
-    animation: neonFlow 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    background-color: #000000;
     color: #ffffff;
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(139, 105, 20, 0.2) 0, transparent 50%), 
+        radial-gradient(at 100% 100%, rgba(218, 165, 32, 0.1) 0, transparent 50%);
+    background-attachment: fixed;
 }
 
-@keyframes neonFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* This creates the flowing lines from your GIF reference */
+.dark-theme::before {
+    content: "";
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(218, 165, 32, 0.03) 40px,
+        rgba(255, 215, 0, 0.06) 80px
+    );
+    animation: flowLines 15s linear infinite;
+    z-index: -1;
+    pointer-events: none;
 }
 
-/* Futuristic Frosted Glass Cards */
+@keyframes flowLines {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(80px, 80px) rotate(0deg); }
+}
+
+/* Glassmorphism Cards for Dark Theme */
 .dark-theme .info-card {
     background: rgba(20, 20, 20, 0.7) !important;
-    backdrop-filter: blur(15px) saturate(160%); /* Frosted glass effect */
-    border: 1px solid rgba(218, 165, 32, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(218, 165, 32, 0.3);
     color: #ffffff;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
 .dark-theme .gold-text {
     color: #FFD700;
-    text-shadow: 0 0 12px rgba(255, 215, 0, 0.6); /* Futuristic Neon Glow */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
 }
 
 .dark-theme .custom-nav {
-    background: rgba(18, 18, 18, 0.95) !important;
-    border-bottom: 1px solid #8B6914;
+    background: rgba(0, 0, 0, 0.95) !important;
+    border-bottom: 2px solid #8B6914;
 }
 
 .dark-theme .hero-header {
-    background: #000000;
-    border-bottom: 3px solid #FFD700;
-}
-
-.dark-theme .description-text, .dark-theme .text-muted {
-    color: #e0e0e0 !important;
+    background: #000;
+    border-bottom: 3px solid #DAA520;
 }
 
 .dark-theme .anime-card {
-    background-color: #1a1a1a;
-    border: 1px solid #333;
+    background-color: #111;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+.dark-theme .text-muted {
+    color: #aaa !important;
 }
