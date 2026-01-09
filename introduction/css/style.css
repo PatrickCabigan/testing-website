@@ -60,14 +60,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
 }
 
 .anime-card img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transition: transform 0.5s ease;
     padding: 10px;
 }
 
@@ -84,73 +82,46 @@ body {
     transition: transform 0.3s ease;
 }
 
-.anime-card:hover img { transform: scale(1.05); }
 .anime-card:hover .anime-overlay { transform: translateY(0); }
 
-.school-logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
-    object-fit: contain;
-    background: #fff;
-    padding: 5px;
-}
-
-.gold-text { color: #8B6914; }
-.contact-box { background: #fff9e6; }
-
-/* --- DARK THEME: RESTORED LIQUID FLOW ANIMATION --- */
-
+/* --- DARK THEME: MOVING LIQUID FLOW --- */
 .dark-theme {
-    background-color: #050505 !important;
-    color: #ffffff;
-    overflow-x: hidden;
+    background-color: #000 !important;
+    color: #fff;
 }
 
-/* This is the moving liquid layer */
 .dark-theme::before {
     content: "";
     position: fixed;
-    top: -100%;
-    left: -100%;
-    width: 300%;
-    height: 300%;
-    /* Creating the "Liquid Lines" using a repeated gradient */
-    background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 30px,
-        rgba(218, 165, 32, 0.04) 30px,
-        rgba(255, 215, 0, 0.08) 60px
-    );
-    /* The animation that moves the lines diagonally */
-    animation: liquidMove 20s linear infinite !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Layered gradients to create the liquid energy look */
+    background: 
+        linear-gradient(125deg, transparent 0%, rgba(218, 165, 32, 0.15) 50%, transparent 100%),
+        linear-gradient(125deg, transparent 30%, rgba(255, 215, 0, 0.1) 45%, transparent 60%);
+    background-size: 400% 400%; /* Important for flowing motion */
+    animation: liquidWave 10s ease infinite;
     z-index: -1;
     pointer-events: none;
 }
 
-@keyframes liquidMove {
-    from {
-        transform: translate(0, 0);
-    }
-    to {
-        /* Moving the lines exactly by their pattern size ensures smooth looping */
-        transform: translate(120px, 120px);
-    }
+@keyframes liquidWave {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-/* Glassmorphism Effect for Dark Theme */
-.dark-theme .info-card, .dark-theme .anime-card {
-    background: rgba(15, 15, 15, 0.8) !important;
-    backdrop-filter: blur(15px) saturate(150%);
+.dark-theme .info-card {
+    background: rgba(15, 15, 15, 0.7) !important;
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(218, 165, 32, 0.3);
-    color: #ffffff;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9);
+    color: #fff;
 }
 
 .dark-theme .gold-text {
     color: #FFD700;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .dark-theme .custom-nav {
