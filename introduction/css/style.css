@@ -1,20 +1,23 @@
+/* --- GLOBAL STYLES --- */
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #fffdf5;
     margin: 0;
-    transition: background 0.5s ease, transform 0.3s ease; /* Added transform for the pop */
+    transition: background 0.8s ease, color 0.5s ease;
 }
 
 /* NAVIGATION */
 .custom-nav {
     background-color: #8B6914;
     padding: 0.8rem 0;
+    transition: background 0.5s ease;
 }
 
 /* HERO SECTION */
 .hero-header {
     background: linear-gradient(135deg, #FFD700, #DAA520);
     border-bottom: 5px solid #8B6914;
+    transition: background 0.5s ease;
 }
 
 .profile-circle {
@@ -95,27 +98,58 @@ body {
 .gold-text { color: #8B6914; }
 .contact-box { background: #fff9e6; }
 
-/* --- DARK THEME: FUTURISTIC ANIMATION --- */
-.dark-theme { 
-    background: linear-gradient(270deg, #121212, #1a1a1a, #2c2401, #121212);
-    background-size: 600% 600%;
-    animation: futuristicFlow 10s ease infinite;
-    color: #fff; 
+/* --- THE MAGIC: FUTURISTIC NEON FLOW DARK THEME --- */
+.dark-theme {
+    /* Moving Neon Background */
+    background: linear-gradient(
+        125deg, 
+        #000000 0%, 
+        #0b0b0b 30%, 
+        #8B6914 50%, 
+        #DAA520 55%, 
+        #0b0b0b 70%, 
+        #000000 100%
+    );
+    background-size: 400% 400%;
+    animation: neonFlow 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    color: #ffffff;
 }
 
-@keyframes futuristicFlow {
+@keyframes neonFlow {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-.dark-theme .info-card { 
-    background: rgba(30, 30, 30, 0.8) !important; 
-    backdrop-filter: blur(10px); /* Futuristic glass effect */
-    color: #fff; 
-    border: 1px solid rgba(218, 165, 32, 0.3);
+/* Futuristic Frosted Glass Cards */
+.dark-theme .info-card {
+    background: rgba(20, 20, 20, 0.7) !important;
+    backdrop-filter: blur(15px) saturate(160%); /* Frosted glass effect */
+    border: 1px solid rgba(218, 165, 32, 0.4);
+    color: #ffffff;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
 }
 
-.dark-theme .custom-nav { background: #1a1a1a; }
-.dark-theme .hero-header { background: #121212; border-bottom-color: #FFD700; }
-.dark-theme .gold-text { color: #FFD700; }
+.dark-theme .gold-text {
+    color: #FFD700;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.6); /* Futuristic Neon Glow */
+}
+
+.dark-theme .custom-nav {
+    background: rgba(18, 18, 18, 0.95) !important;
+    border-bottom: 1px solid #8B6914;
+}
+
+.dark-theme .hero-header {
+    background: #000000;
+    border-bottom: 3px solid #FFD700;
+}
+
+.dark-theme .description-text, .dark-theme .text-muted {
+    color: #e0e0e0 !important;
+}
+
+.dark-theme .anime-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+}
