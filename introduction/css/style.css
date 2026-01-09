@@ -1,159 +1,69 @@
-/* --- GLOBAL STYLES --- */
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #fffdf5;
-    margin: 0;
-    transition: background-color 0.8s ease;
-}
-
-/* NAVIGATION */
-.custom-nav {
-    background-color: #8B6914;
-    padding: 0.8rem 0;
-}
-
-/* HERO SECTION */
-.hero-header {
-    background: linear-gradient(135deg, #FFD700, #DAA520);
-    border-bottom: 5px solid #8B6914;
-}
-
-.profile-circle {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 5px solid #fff;
-    object-fit: cover;
-}
-
-.description-text {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-/* CARDS & HOVER ANIMATION */
-.info-card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    border-top: 5px solid #DAA520;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.info-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(139, 105, 20, 0.3);
-}
-
-/* ANIME GALLERY */
-.anime-card {
-    position: relative;
-    overflow: hidden;
-    border-radius: 15px;
-    height: 350px;
-    background-color: #fcf8e3;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.4s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.anime-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition: transform 0.5s ease;
-    padding: 10px;
-}
-
-.anime-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(139, 105, 20, 0.9);
-    color: white;
-    padding: 10px;
-    text-align: center;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.anime-card:hover img { transform: scale(1.05); }
-.anime-card:hover .anime-overlay { transform: translateY(0); }
-
-.school-logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 10px;
-    object-fit: contain;
-    background: #fff;
-    padding: 5px;
-}
-
-.gold-text { color: #8B6914; }
-.contact-box { background: #fff9e6; }
-
-/* --- DARK THEME: LIQUID FLOW ANIMATION --- */
+/* --- THE MAGIC: FUTURISTIC LIQUID FLOW DARK THEME --- */
 
 .dark-theme {
     background-color: #000000;
     color: #ffffff;
+    /* This creates the base "moving liquid" effect */
     background-image: 
-        radial-gradient(at 0% 0%, rgba(139, 105, 20, 0.2) 0, transparent 50%), 
-        radial-gradient(at 100% 100%, rgba(218, 165, 32, 0.1) 0, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(139, 105, 20, 0.15) 0, transparent 50%), 
+        radial-gradient(at 50% 0%, rgba(218, 165, 32, 0.15) 0, transparent 50%), 
+        radial-gradient(at 100% 0%, rgba(255, 215, 0, 0.15) 0, transparent 50%);
     background-attachment: fixed;
+    overflow-x: hidden;
 }
 
-/* This creates the flowing lines from your GIF reference */
+/* Creating the flowing lines from the GIF using a Pseudo-element */
 .dark-theme::before {
     content: "";
     position: fixed;
-    top: -50%;
-    left: -50%;
+    top: 0;
+    left: 0;
     width: 200%;
-    height: 200%;
+    height: 100%;
     background: repeating-linear-gradient(
-        45deg,
         transparent,
-        transparent 40px,
-        rgba(218, 165, 32, 0.03) 40px,
-        rgba(255, 215, 0, 0.06) 80px
+        transparent 20px,
+        rgba(218, 165, 32, 0.05) 20px,
+        rgba(218, 165, 32, 0.05) 40px
     );
-    animation: flowLines 15s linear infinite;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+    transform: skewY(-10deg);
+    animation: flowLines 10s linear infinite;
     z-index: -1;
     pointer-events: none;
 }
 
+/* The "Wavy" movement animation */
 @keyframes flowLines {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    100% { transform: translate(80px, 80px) rotate(0deg); }
+    0% { background-position: 0 0; transform: skewY(-10deg) translateX(0); }
+    100% { background-position: 0 400px; transform: skewY(-10deg) translateX(-50%); }
 }
 
-/* Glassmorphism Cards for Dark Theme */
+/* Futuristic Frosted Glass Cards (GIF Aesthetic) */
 .dark-theme .info-card {
-    background: rgba(20, 20, 20, 0.7) !important;
-    backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(15, 15, 15, 0.75) !important;
+    backdrop-filter: blur(20px) saturate(180%); /* Strong blur for high-end look */
     border: 1px solid rgba(218, 165, 32, 0.3);
+    border-top: 4px solid #DAA520;
     color: #ffffff;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
 }
 
 .dark-theme .gold-text {
     color: #FFD700;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
 .dark-theme .custom-nav {
-    background: rgba(0, 0, 0, 0.95) !important;
+    background: rgba(0, 0, 0, 0.9) !important;
     border-bottom: 2px solid #8B6914;
 }
 
 .dark-theme .hero-header {
-    background: #000;
+    background: #000000;
     border-bottom: 3px solid #DAA520;
+    position: relative;
+    z-index: 1;
 }
 
 .dark-theme .anime-card {
@@ -161,6 +71,6 @@ body {
     border: 1px solid rgba(218, 165, 32, 0.2);
 }
 
-.dark-theme .text-muted {
-    color: #aaa !important;
+.dark-theme .description-text {
+    color: #cccccc;
 }
